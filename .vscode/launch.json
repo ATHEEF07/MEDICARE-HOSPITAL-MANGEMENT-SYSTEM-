@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch MediCare HMS (Exe)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT/bin/Debug/net10.0-windows/MEDICARE HOSPITAL MANGAMENT.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Launch MediCare HMS (Dll)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT/bin/Debug/net10.0-windows/MEDICARE HOSPITAL MANGAMENT.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Run Phase 6 Verification Tests",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT/bin/Debug/net10.0-windows/MEDICARE HOSPITAL MANGAMENT.dll",
+      "args": ["--test-phase6"],
+      "cwd": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Run Phase 5 Verification Tests",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT/bin/Debug/net10.0-windows/MEDICARE HOSPITAL MANGAMENT.dll",
+      "args": ["--test-phase5"],
+      "cwd": "${workspaceFolder}/MEDICARE HOSPITAL MANGAMENT",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    }
+  ]
+}
