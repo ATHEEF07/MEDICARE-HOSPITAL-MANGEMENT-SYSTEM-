@@ -131,6 +131,7 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
             pnlInvoiceBuilder.Padding = new Padding(12);
             pnlInvoiceBuilder.Size = new Size(600, 645);
             pnlInvoiceBuilder.TabIndex = 0;
+            splitContainer.Panel1.Controls.Add(pnlInvoiceBuilder);
 
             // grpPatientAppt
             grpPatientAppt.Controls.Add(lblPatient);
@@ -405,6 +406,7 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
             pnlRecentBills.Padding = new Padding(12);
             pnlRecentBills.Size = new Size(616, 645);
             pnlRecentBills.TabIndex = 0;
+            splitContainer.Panel2.Controls.Add(pnlRecentBills);
 
             // pnlRecentFilter
             pnlRecentFilter.BackColor = Color.FromArgb(245, 248, 252);

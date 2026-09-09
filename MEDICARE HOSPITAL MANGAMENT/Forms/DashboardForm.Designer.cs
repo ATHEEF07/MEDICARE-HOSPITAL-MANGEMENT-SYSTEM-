@@ -169,6 +169,10 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
                 sub.Font = new Font("Segoe UI", 7.5F);
                 sub.ForeColor = Color.FromArgb(120, 120, 120);
                 sub.Location = new Point(10, 58);
+
+                pnl.Controls.Add(title);
+                pnl.Controls.Add(val);
+                pnl.Controls.Add(sub);
             }
 
             StyleCard(pnlCardPatients, lblPatientsTitle, lblPatientsVal, lblPatientsSub, Color.FromArgb(40, 80, 130), Color.FromArgb(20, 70, 130));
@@ -287,12 +291,12 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
             lblGridTitle.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblGridTitle.ForeColor = Color.FromArgb(20, 60, 110);
             lblGridTitle.Location = new Point(0, 5);
-            lblGridTitle.Text = "Today's Scheduled Consultations & Patient Appointments";
+            lblGridTitle.Text = "Today's & Upcoming Scheduled Consultations";
 
             lblGridSub.AutoSize = true;
             lblGridSub.Font = new Font("Segoe UI", 8.5F, FontStyle.Italic);
             lblGridSub.ForeColor = Color.Gray;
-            lblGridSub.Location = new Point(470, 10);
+            lblGridSub.Location = new Point(410, 10);
             lblGridSub.Text = "(Double-click any scheduled appointment to launch doctor consultation)";
 
             // dgvTodayAppts

@@ -15,6 +15,7 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Models
         public int PendingBillsCount { get; set; }
         public decimal TodayRevenue { get; set; }
         public decimal PendingBillsTotalDue { get; set; }
+        public int UpcomingAppointmentsCount { get; set; }
 
         public double AppointmentCompletionRate =>
             TodayAppointments > 0 ? (double)CompletedAppointmentsToday / TodayAppointments * 100.0 : 0.0;

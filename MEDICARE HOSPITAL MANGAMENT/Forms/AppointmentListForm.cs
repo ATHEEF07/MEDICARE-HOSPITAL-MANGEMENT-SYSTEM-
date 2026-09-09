@@ -163,7 +163,11 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
         {
             using var form = new AppointmentBookingForm();
             if (form.ShowDialog() == DialogResult.OK)
+            {
+                dtpFilterDate.Value = form.BookedDate;
+                chkUseDate.Checked = true;
                 ApplyFilters();
+            }
         }
 
         private void btnReschedule_Click(object sender, EventArgs e)
@@ -180,7 +184,11 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
 
             using var form = new AppointmentBookingForm(appt);
             if (form.ShowDialog() == DialogResult.OK)
+            {
+                dtpFilterDate.Value = form.BookedDate;
+                chkUseDate.Checked = true;
                 ApplyFilters();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

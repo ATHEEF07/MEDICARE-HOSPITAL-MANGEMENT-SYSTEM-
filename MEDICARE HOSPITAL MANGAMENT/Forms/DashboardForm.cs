@@ -39,6 +39,14 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
 
             dgvTodayAppts.Columns.Add(new DataGridViewTextBoxColumn
             {
+                DataPropertyName = "Date",
+                HeaderText = "Date",
+                Width = 95,
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy", Alignment = DataGridViewContentAlignment.MiddleCenter }
+            });
+
+            dgvTodayAppts.Columns.Add(new DataGridViewTextBoxColumn
+            {
                 DataPropertyName = "TimeSlot",
                 HeaderText = "Time Slot",
                 Width = 110
@@ -96,7 +104,14 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
             lblPatientsVal.Text = metrics.TotalPatients.ToString("N0");
 
             lblApptsVal.Text = metrics.TodayAppointments.ToString("N0");
-            lblApptsSub.Text = $"{metrics.CompletedAppointmentsToday} Completed ({metrics.AppointmentCompletionRate:F0}%)";
+            if (metrics.TodayAppointments > 0)
+            {
+                lblApptsSub.Text = $"{metrics.CompletedAppointmentsToday} Completed ({metrics.AppointmentCompletionRate:F0}%)";
+            }
+            else
+            {
+                lblApptsSub.Text = $"{metrics.UpcomingAppointmentsCount} Upcoming Scheduled";
+            }
 
             lblDoctorsVal.Text = metrics.AvailableDoctorsCount.ToString("N0");
 

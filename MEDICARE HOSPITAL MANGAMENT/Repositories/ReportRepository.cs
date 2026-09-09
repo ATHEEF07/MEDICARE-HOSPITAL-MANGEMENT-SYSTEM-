@@ -32,8 +32,12 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Repositories
                     (SELECT COUNT(1) FROM dbo.Medicines WHERE StockQuantity <= ReorderLevel AND IsActive = 1) AS LowStockMedicinesCount,
                     (SELECT COUNT(1) FROM dbo.Bills WHERE Status IN ('Pending', 'PartiallyPaid')) AS PendingBillsCount,
                     (SELECT ISNULL(SUM(Amount), 0.00) FROM dbo.Payments WHERE CAST(PaymentDate AS DATE) = CAST(GETDATE() AS DATE)) AS TodayRevenue,
-                    (SELECT ISNULL(SUM(b.TotalAmount - ISNULL((SELECT SUM(p.Amount) FROM dbo.Payments p WHERE p.BillID = b.BillID), 0)), 0.00)
-                     FROM dbo.Bills b WHERE b.Status IN ('Pending', 'PartiallyPaid')) AS PendingBillsTotalDue;";
+                    ISNULL(
+                        (SELECT ISNULL(SUM(b.TotalAmount), 0.00) FROM dbo.Bills b WHERE b.Status IN ('Pending', 'PartiallyPaid')) -
+                        (SELECT ISNULL(SUM(p.Amount), 0.00) FROM dbo.Payments p INNER JOIN dbo.Bills b2 ON p.BillID = b2.BillID WHERE b2.Status IN ('Pending', 'PartiallyPaid')),
+                        0.00
+                    ) AS PendingBillsTotalDue,
+                    (SELECT COUNT(1) FROM dbo.Appointments WHERE AppointmentDate >= CAST(GETDATE() AS DATE) AND Status = 'Scheduled') AS UpcomingAppointmentsCount;";
 
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();
@@ -50,13 +54,14 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Repositories
                 metrics.PendingBillsCount          = reader.GetInt32(5);
                 metrics.TodayRevenue               = reader.GetDecimal(6);
                 metrics.PendingBillsTotalDue       = reader.GetDecimal(7);
+                metrics.UpcomingAppointmentsCount  = reader.GetInt32(8);
             }
 
             return metrics;
         }
 
         /// <summary>
-        /// Retrieves today's appointments for immediate dashboard viewing.
+        /// Retrieves today's and upcoming appointments for immediate dashboard viewing.
         /// </summary>
         public List<AppointmentReportItem> GetTodayAppointmentsList()
         {
@@ -71,8 +76,8 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Repositories
                 INNER JOIN dbo.Patients p ON a.PatientID = p.PatientID
                 INNER JOIN dbo.Doctors d ON a.DoctorID = d.DoctorID
                 INNER JOIN dbo.Departments dep ON d.DepartmentID = dep.DepartmentID
-                WHERE a.AppointmentDate = CAST(GETDATE() AS DATE)
-                ORDER BY a.StartTime ASC;";
+                WHERE a.AppointmentDate >= CAST(GETDATE() AS DATE)
+                ORDER BY a.AppointmentDate ASC, a.StartTime ASC;";
 
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();

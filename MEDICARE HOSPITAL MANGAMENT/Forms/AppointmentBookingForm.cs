@@ -26,6 +26,9 @@ namespace MEDICARE_HOSPITAL_MANGAMENT.Forms
 
         private bool _isReschedule => _existingAppointment != null;
 
+        /// <summary>The date of the newly created or rescheduled appointment.</summary>
+        public DateTime BookedDate => dtpAppointmentDate.Value.Date;
+
         // ─────────────────────────────────────────────────────────────────────────
         // Constructor overloads
         // ─────────────────────────────────────────────────────────────────────────
